@@ -1,7 +1,11 @@
 import React from 'react';
 
 const Clubs = () => {
-  return <div></div>;
+  return (
+    <div>
+      <h1>Clubs</h1>
+    </div>
+  );
 };
 
 export default Clubs;
