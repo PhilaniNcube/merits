@@ -11,17 +11,18 @@ const SchoolList = ({ schools }) => {
           return (
             <div
               key={school.slug}
-              className="overflow-hidden transition-shadow duration-300 bg-gray-50 rounded"
+              className="overflow-hidden bg-gray-100 shadow-md transition-shadow duration-300 rounded"
             >
               <span className="object-cover w-full h-64">
                 <Image
-                  src={school.image.formats.medium.url}
+                  src={school.image.url}
                   height={1280}
                   width={1920}
                   alt={school.name}
+                  className="object-cover w-full h-64"
                 />
               </span>
-              <div className="p-5 border border-t-0">
+              <div className="px-5 py-4">
                 <p className="mb-3 text-xs font-semibold tracking-wide uppercase">
                   <Link href={`/schools/${schools.slug}`}>
                     <a

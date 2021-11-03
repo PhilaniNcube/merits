@@ -1,8 +1,6 @@
 import { Fragment } from 'react';
 import Events from '../components/Homepage/Events';
-import { FeaturedSchools } from '../components/Homepage/FeaturedSchools';
-import { Feature } from '../components/Homepage/Features';
-import HomepageHero from '../components/Homepage/HomepageHero';
+import { API_URL } from '../config/index';
 
 export default function Home({ events }) {
   console.log(events);
@@ -13,17 +11,13 @@ export default function Home({ events }) {
   );
 }
 
-export async function getStaticProps(context) {
-  const res = await fetch('http://localhost:1337/schools');
-  const schools = await res.json();
-  const eventsRes = await fetch('http://localhost:1337/events');
+export async function getServerSideProps() {
+  const eventsRes = await fetch(`${API_URL}/events`);
   const events = await eventsRes.json();
 
   return {
     props: {
-      schools: schools,
       events: events,
     },
-    revalidate: 1,
   };
 }

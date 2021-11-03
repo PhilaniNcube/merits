@@ -31,7 +31,7 @@ const Events = ({ events }) => {
                     aria-label="Article"
                     className="inline-block mb-3 text-black transition-colors duration-200 hover:text-deep-purple-accent-700"
                   >
-                    <h3 className="text-2xl text-blue-700 font-bold leading-5">
+                    <h3 className="text-xl text-blue-700 font-bold leading-5">
                       {event.name}
                     </h3>
                   </a>
