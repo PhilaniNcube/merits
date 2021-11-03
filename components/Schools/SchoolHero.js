@@ -34,10 +34,10 @@ export const SchoolHero = ({ school }) => {
         <div>
           <Image
             className="object-cover w-full h-56 rounded shadow-lg sm:h-96"
-            src={school.image.formats.large.url}
-            width={school.image.formats.large.width}
-            height={school.image.formats.large.height}
-            alt=""
+            src={school.image.url}
+            width={1920}
+            height={1080}
+            alt={school.name}
           />
         </div>
       </div>
