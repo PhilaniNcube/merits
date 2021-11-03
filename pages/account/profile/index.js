@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 import AuthContext from '../../../context/AuthContext';
 import { parseCookies } from '../../../helpers/index';
+import ProfileHeader from '../../../components/Profile/ProfileHeader';
 
 const Profile = ({ events, schools, token }) => {
   console.log(events);
@@ -29,9 +30,9 @@ const Profile = ({ events, schools, token }) => {
   }
 
   return (
-    <div className="bg-white container my-8 mx-auto shadow overflow-hidden sm:rounded-lg">
-      Hello
-    </div>
+    <Fragment>
+      <ProfileHeader events={events} schools={schools} user={user} />
+    </Fragment>
   );
 };
 
