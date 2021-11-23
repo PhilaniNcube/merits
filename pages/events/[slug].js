@@ -37,7 +37,9 @@ const Event = ({ event }) => {
                 <h6 className="mb-2 font-semibold text-white leading-5">
                   Date
                 </h6>
-                <p className="text-sm text-white">{event.date}</p>
+                <p className="text-sm text-white">
+                  {new Date(event.date).toLocaleDateString('en-ZA')}
+                </p>
                 <p className="text-sm text-white">{event.time}</p>
               </div>
             </div>

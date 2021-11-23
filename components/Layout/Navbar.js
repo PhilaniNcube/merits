@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import AuthContext from '../../context/AuthContext';
+import Search from '../Search/Search';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -38,7 +39,8 @@ const Navbar = () => {
               </span>
             </a>
           </Link>
-          <ul className="items-center hidden space-x-8 lg:flex">
+          <Search />
+          <ul className="items-center hidden space-x-8 lg:flex px-3">
             <li>
               <Link href="/schools">
                 <a
