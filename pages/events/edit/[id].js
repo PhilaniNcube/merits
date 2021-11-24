@@ -25,6 +25,17 @@ export default function EditEvent({ token, evt }) {
     evt.featuredImage ? evt.featuredImage.formats.thumbnail.url : null,
   );
 
+  const imageUploaded = async () => {
+    const res = await fetch(`${API_URL}/events/${evt.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await res.json();
+    setImagePreview(data.featuredImage.formats.thumbnail.url);
+    setShowModal(false);
+  };
+
   const [showModal, setShowModal] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -244,7 +255,13 @@ export default function EditEvent({ token, evt }) {
                 Set Image
               </button>
             </div>
-            <Modal show={showModal} onClose={() => setShowModal(false)} />
+            <Modal
+              show={showModal}
+              onClose={() => setShowModal(false)}
+              imageUploaded={imageUploaded}
+              eventId={evt.id}
+              token={token}
+            />
           </div>
         </div>
       </div>

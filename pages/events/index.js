@@ -2,11 +2,12 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import React, { Fragment } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import Events from '../../components/Homepage/Events';
-import { API_URL } from '../../config';
+import { API_URL, PER_PAGE } from '../../config';
 
-const index = ({ events }) => {
-  console.log(events);
+const index = ({ events, page, total }) => {
+  const lastPage = Math.ceil(total / PER_PAGE);
 
   return (
     <Fragment>
@@ -37,19 +38,47 @@ const index = ({ events }) => {
         </div>
       </div>
       <Events events={events} />
+      <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+        <div className="flex-1 flex max-w-7xl mx-auto justify-between">
+          {page > 1 && (
+            <Link href={`/events?page=${page - 1}`}>
+              <a className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                Previous
+              </a>
+            </Link>
+          )}
+          {page < lastPage && (
+            <Link href={`/events?page=${page + 1}`}>
+              <a className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                Next
+              </a>
+            </Link>
+          )}
+        </div>
+      </div>
     </Fragment>
   );
 };
 
 export default index;
 
-export async function getServerSideProps() {
-  const res = await fetch(`${API_URL}/events?_sort=date:DESC`);
+export async function getServerSideProps({ query: { page = 1 } }) {
+  const start = +page === 1 ? 0 : (+page - 1) * PER_PAGE;
+
+  const res = await fetch(
+    `${API_URL}/events?_sort=date:DESC&_limit=${PER_PAGE}&_start=${start}`,
+  );
   const events = await res.json();
+
+  // Fecth total events
+  const totalRes = await fetch(`${API_URL}/events/count`);
+  const total = await totalRes.json();
 
   return {
     props: {
       events,
+      page: +page,
+      total,
     },
   };
 }
