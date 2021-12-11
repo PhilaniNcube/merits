@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import Link from 'next/link';
+import { HeartIcon } from '@heroicons/react/solid';
 
 const Events = ({ events }) => {
   return (
@@ -42,8 +43,9 @@ const Events = ({ events }) => {
                   {event.school.streetAddress}, {event.school.town_city}
                 </p>
                 <p className="mb-4 text-sm text-gray-700">Time: {event.time}</p>
-                <div className="flex align-center space-x-8">
-                  <p className=" text-gray-700 text-xs">{`Attendees: ${event.attendees.length}`}</p>
+                <div className="flex align-center items-center space-x-1">
+                  <HeartIcon className="h-6 w-6 text-red-600" />
+                  {event.likes ? <p>{event.likes}</p> : <p>0</p>}
                 </div>
                 <Link href={`/events/${event.slug}`} passHref>
                   <button className="bg-blue-700 my-3 text-white px-5 py-2 rounded">

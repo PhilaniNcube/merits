@@ -31,7 +31,7 @@ const Profile = ({ events, schools, token }) => {
 
   return (
     <Fragment>
-      <ProfileHeader events={events} schools={schools} user={user} />
+      <ProfileHeader events={events} />
     </Fragment>
   );
 };
@@ -50,18 +50,18 @@ export async function getServerSideProps({ req }) {
 
   const schools = await schoolRes.json();
 
-  const res = await fetch(`${API_URL}/events/me`, {
+  const res = await fetch(`${API_URL}/users`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 
-  const events = await res.json();
+  const users = await res.json();
 
   return {
     props: {
-      events,
+      user: users[0],
       schools,
       token,
     },

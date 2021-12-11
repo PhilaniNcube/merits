@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <Fragment>
       <AuthProvider>
-        <Navbar />
+        <Navbar className="z-30" />
         <Component {...pageProps} />
       </AuthProvider>
     </Fragment>

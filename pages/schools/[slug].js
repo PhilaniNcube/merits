@@ -3,6 +3,7 @@ import { SchoolHero } from '../../components/Schools/SchoolHero';
 import { API_URL } from '../../config';
 
 const school = ({ school }) => {
+  console.log(school);
   return (
     <Fragment>
       <SchoolHero school={school} />

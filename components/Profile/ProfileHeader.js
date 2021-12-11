@@ -1,58 +1,109 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Image from 'next/image';
+import { PaperClipIcon } from '@heroicons/react/solid';
+import AuthContext from '../../context/AuthContext';
+import { API_URL } from '../../config';
 
-const ProfileHeader = ({ school, user }) => {
+const ProfileHeader = () => {
+  const { user } = useContext(AuthContext);
+
+  console.log(user);
+
   return (
-    <div className="max-w-md mx-auto p-8 sm:flex sm:space-x-6 dark:bg-coolGray-900 dark:text-coolGray-100">
-      <div className="flex-shrink-0 w-full mb-6 h-44 sm:h-32 sm:w-32 sm:mb-0">
-        <span className="object-cover object-center w-full h-full rounded dark:bg-coolGray-500">
-          <Image
-            width={200}
-            height={200}
-            src="/images/avatar.svg"
-            alt="avatar"
-          />
-        </span>
+    <div className="bg-white shadow max-w-7xl mx-auto mt-6 overflow-hidden sm:rounded-lg">
+      <div className="px-4 py-5 sm:px-6">
+        <h3 className="text-lg leading-6 font-medium text-gray-900">
+          My Profile
+        </h3>
+        <p className="mt-1 max-w-2xl text-sm text-gray-500">
+          Personal details and application.
+        </p>
       </div>
-      <div className="flex flex-col space-y-4">
-        <div>
-          <h2 className="text-2xl font-semibold">
-            {`${user.firstName} ${user.lastName}`}{' '}
-          </h2>
-          <span className="text-sm dark:text-coolGray-400">
-            {user.school.name}
-          </span>
-        </div>
-        <div className="space-y-1">
-          <span className="flex items-center space-x-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-              aria-label="Email address"
-              className="w-4 h-4"
-            >
-              <path
-                fill="currentColor"
-                d="M274.6,25.623a32.006,32.006,0,0,0-37.2,0L16,183.766V496H496V183.766ZM464,402.693,339.97,322.96,464,226.492ZM256,51.662,454.429,193.4,311.434,304.615,256,268.979l-55.434,35.636L57.571,193.4ZM48,226.492,172.03,322.96,48,402.693ZM464,464H48V440.735L256,307.021,464,440.735Z"
-              ></path>
-            </svg>
-            <span className="dark:text-coolGray-400">{user.email}</span>
-          </span>
-          <span className="flex items-center space-x-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-              aria-label="Phonenumber"
-              className="w-4 h-4"
-            >
-              <path
-                fill="currentColor"
-                d="M449.366,89.648l-.685-.428L362.088,46.559,268.625,171.176l43,57.337a88.529,88.529,0,0,1-83.115,83.114l-57.336-43L46.558,362.088l42.306,85.869.356.725.429.684a25.085,25.085,0,0,0,21.393,11.857h22.344A327.836,327.836,0,0,0,461.222,133.386V111.041A25.084,25.084,0,0,0,449.366,89.648Zm-20.144,43.738c0,163.125-132.712,295.837-295.836,295.837h-18.08L87,371.76l84.18-63.135,46.867,35.149h5.333a120.535,120.535,0,0,0,120.4-120.4v-5.333l-35.149-46.866L371.759,87l57.463,28.311Z"
-              ></path>
-            </svg>
-            <span className="dark:text-coolGray-400">{user.mobile}</span>
-          </span>
-        </div>
+      <div className="border-t border-gray-200">
+        <dl>
+          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt className="text-sm font-medium text-gray-500">Full name</dt>
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              {`${user.firstName} ${user.lastName}`}
+            </dd>
+          </div>
+          <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt className="text-sm font-medium text-gray-500">School</dt>
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              School
+            </dd>
+          </div>
+          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt className="text-sm font-medium text-gray-500">Email address</dt>
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              {user.email}
+            </dd>
+          </div>
+          <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt className="text-sm font-medium text-gray-500">Total Merits</dt>
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              {user.totalMerits}
+            </dd>
+          </div>
+          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt className="text-sm font-medium text-gray-500">About</dt>
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim
+              incididunt cillum culpa consequat. Excepteur qui ipsum aliquip
+              consequat sint. Sit id mollit nulla mollit nostrud in ea officia
+              proident. Irure nostrud pariatur mollit ad adipisicing
+              reprehenderit deserunt qui eu.
+            </dd>
+          </div>
+          <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt className="text-sm font-medium text-gray-500">Attachments</dt>
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <ul
+                role="list"
+                className="border border-gray-200 rounded-md divide-y divide-gray-200"
+              >
+                <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                  <div className="w-0 flex-1 flex items-center">
+                    <PaperClipIcon
+                      className="flex-shrink-0 h-5 w-5 text-gray-400"
+                      aria-hidden="true"
+                    />
+                    <span className="ml-2 flex-1 w-0 truncate">
+                      resume_back_end_developer.pdf
+                    </span>
+                  </div>
+                  <div className="ml-4 flex-shrink-0">
+                    <a
+                      href="#"
+                      className="font-medium text-indigo-600 hover:text-indigo-500"
+                    >
+                      Download
+                    </a>
+                  </div>
+                </li>
+                <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                  <div className="w-0 flex-1 flex items-center">
+                    <PaperClipIcon
+                      className="flex-shrink-0 h-5 w-5 text-gray-400"
+                      aria-hidden="true"
+                    />
+                    <span className="ml-2 flex-1 w-0 truncate">
+                      coverletter_back_end_developer.pdf
+                    </span>
+                  </div>
+                  <div className="ml-4 flex-shrink-0">
+                    <a
+                      href="#"
+                      className="font-medium text-indigo-600 hover:text-indigo-500"
+                    >
+                      Download
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            </dd>
+          </div>
+        </dl>
       </div>
     </div>
   );
