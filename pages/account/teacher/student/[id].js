@@ -35,6 +35,9 @@ const StudentPage = ({ student, token }) => {
       if (student.merits.length === 0) {
         points = 0;
         student.totalMerits = points;
+      } else if (student.merits === null) {
+        points = 0;
+        student.totalMerits = points;
       } else {
         points = student.merits.reduce(function(acc, cur) {
           acc += cur.points;
