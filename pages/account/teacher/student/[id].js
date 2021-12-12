@@ -66,6 +66,9 @@ const StudentPage = ({ student, token }) => {
           {student.firstName} {student.lastName}
         </h1>
         <p className="text-sm md:text-lg text-gray-400">{student.email}</p>
+        <p className="text-sm md:text-lg text-gray-400">
+          Total Merits {student.totalMerits}
+        </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
         <div className="shadow rounded p-2">

@@ -87,8 +87,8 @@ const teacher = ({ users, school, token, schoolTeacher }) => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <Link href={`/account/teacher/student/${person.id}`}>
-                          <a className="text-indigo-600 hover:text-indigo-900">
-                            Edit
+                          <a className="text-white bg-indigo-600 p-2 rounded">
+                            Award Merits
                           </a>
                         </Link>
                       </td>
