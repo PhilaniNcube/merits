@@ -30,6 +30,29 @@ const StudentPage = ({ student, token }) => {
       }
       console.log('Something Went Wrong');
     } else {
+      let points = 0;
+
+      if (student.merits.length === 0) {
+        points = 0;
+        student.totalMerits = points;
+      } else {
+        points = student.merits.reduce(function(acc, cur) {
+          acc += cur.points;
+          return acc;
+        }, 0);
+
+        const totalMeritsRes = await fetch(`${API_URL}/users/${student.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            totalMerits: points,
+          }),
+        });
+      }
+
       const merit = await res.json();
       console.log(merit);
       router.push('/account/teacher');
