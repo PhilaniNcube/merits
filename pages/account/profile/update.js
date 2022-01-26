@@ -11,11 +11,9 @@ const Update = ({ events, schools, token }) => {
 
   const { user, update } = useContext(AuthContext);
 
-  console.log(user);
-
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+
   const [school, setSchool] = useState('');
   const [grade, setGrade] = useState(7);
   const [mobile, setMobile] = useState('');

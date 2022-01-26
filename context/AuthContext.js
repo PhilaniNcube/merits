@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
 
     if (res.ok) {
       setUser(data.user);
-      router.push('/');
+      router.push('/account/profile/update');
     } else {
       setError(data.message);
       setError(null);
@@ -75,7 +75,9 @@ export const AuthProvider = ({ children }) => {
 
     const data = await res.json();
 
-    console.log(data);
+    if (res.ok) {
+      router.push('/');
+    }
 
     if (!res.ok) {
       setError(data.message);

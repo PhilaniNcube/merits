@@ -30,11 +30,10 @@ export default async (req, res) => {
     if (strapiRes.ok) {
       res.status(200).json({ user: data.user });
     } else {
-      res
-        .status(data.statusCode)
-        .json({ message: data.message[0].messages[0].message });
+      res.status(data.statusCode).json({ message: data.message[0] });
     }
   } else {
+    console.log('Error');
     res.setHeader('Allow', ['PUT']);
     res.status(405).json({ message: `Method ${req.method} not allowed` });
   }
